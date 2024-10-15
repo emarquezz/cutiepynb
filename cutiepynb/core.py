@@ -1,6 +1,6 @@
 import json 
 import re
-import seaborn as sns  # Make it conditional 
+#import seaborn as sns  # Make it conditional 
 
 from .utils import generate_corpus_id, save_doc_enchulado
 from .styles import maquillate, update_heading_colors_in_document
