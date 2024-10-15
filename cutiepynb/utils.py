@@ -1,4 +1,5 @@
 import uuid
+import json
 
 def generate_corpus_id():
     """Generate a random 8-character hexadecimal string using the uuid module."""
