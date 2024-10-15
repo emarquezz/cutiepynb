@@ -4,7 +4,8 @@
 [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cutiepynb.svg)](https://anaconda.org/conda-forge/cutiepynb)
 ![Run Python Tests](https://github.com/emarquezz/cutiepynb/actions/workflows/python-tests.yml/badge.svg)
 
-**Turn your Jupyter Notebooks into beautiful, colorful creations with cutiepynb!** Dress them up with vibrant title colors and an auto-generated table of contents.
+**Turn your Jupyter Notebooks into beautiful, colorful cutie ipynb with cutiepynb!** 
+Dress them up with vibrant title colors and an auto-generated table of contents.
 
 - **License:** [MIT License](LICENSE)
 - **Documentation:** [cutiepynb Docs](https://emarquezz.github.io/cutiepynb)
