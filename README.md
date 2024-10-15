@@ -1,4 +1,4 @@
-# cutiepynb
+# cutiepynb 💖
 
 [![PyPI Version](https://img.shields.io/pypi/v/cutiepynb.svg)](https://pypi.python.org/pypi/cutiepynb)
 [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cutiepynb.svg)](https://anaconda.org/conda-forge/cutiepynb)
