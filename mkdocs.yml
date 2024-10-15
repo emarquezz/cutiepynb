@@ -80,6 +80,7 @@ nav:
     - Changelog: changelog.md
     - Report Issues: https://github.com/emarquezz/cutiepynb/issues
     - Examples:
+        - Example Notebooks: examples/example_notebooks.md
         - examples/intro.ipynb
     - API Reference:
           - cutiepynb module: cutiepynb.md

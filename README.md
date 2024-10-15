@@ -16,3 +16,9 @@ Custom your title colors and create an automatic table of contents.
 ## Features
 
 -   TODO
+
+
+## Examples
+To see `cutiepynb` in action, run the following script to process example notebooks:
+```bash
+python run_examples.py
