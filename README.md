@@ -5,7 +5,8 @@
 [![image](https://img.shields.io/conda/vn/conda-forge/cutiepynb.svg)](https://anaconda.org/conda-forge/cutiepynb)
 
 
-**Make your Jupyter notebooks pretty with custom colors and a table of contents.**
+**Dress up your Jupyter Notebooks and make them a cutie pie!**
+Custom your title colors and create an automatic table of contents.
 
 
 -   Free software: MIT License
