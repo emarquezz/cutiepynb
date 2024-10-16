@@ -1,5 +1,5 @@
 import os
-from cutiepynb.core import cutipy_nb
+from cutiepynb.core import cutiepy_nb
 
 def run_example_notebooks():
     example_files = [
@@ -8,7 +8,7 @@ def run_example_notebooks():
     ]
 
     for file in example_files:
-        cutipy_nb(file, colors=['#40498e', '#357ba3', '#38aaac', '#79d6ae'], save=True)
+        cutiepy_nb(file, colors=['#40498e', '#357ba3', '#38aaac', '#79d6ae'], save=True)
         print(f"Processed notebook: {file}")
 
 if __name__ == '__main__':

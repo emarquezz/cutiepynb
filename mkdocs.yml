@@ -84,4 +84,4 @@ nav:
         - examples/intro.ipynb
     - API Reference:
           - cutiepynb module: cutiepynb.md
-          - common module: common.md
+          - core module: core.md

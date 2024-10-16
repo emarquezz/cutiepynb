@@ -1,11 +1,11 @@
 import os
 import json
-from cutiepynb.core import cutipy_nb
+from cutiepynb.core import cutiepy_nb
 
-def test_cutipy_nb():
+def test_cutiepy_nb_nb():
     # Path to the test notebook
     test_file = './docs/examples/Test.ipynb'
-    cutipy_nb(test_file, colors=['#40498e', '#357ba3'], save=True)
+    cutiepy_nb(test_file, colors=['#40498e', '#357ba3'], save=True)
 
     # Check that the modified file exists and has the expected changes
     modified_file = './docs/examples/Test_chulo.ipynb'
