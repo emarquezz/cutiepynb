@@ -82,6 +82,7 @@ nav:
     - Examples:
         - Example Notebooks: examples/example_notebooks.md
         - examples/intro.ipynb
+        - Test Notebook: examples/Test.ipynb
     - API Reference:
           - cutiepynb module: cutiepynb.md
           - core module: core.md

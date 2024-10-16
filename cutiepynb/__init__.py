@@ -2,7 +2,7 @@
 
 __author__ = """Elisa Márquez-Zavala"""
 __email__ = "emarquez@lcg.unam.mx"
-__version__ = "0.1.0-beta"
+__version__ = "1.0.0"
 
 
 from .core import cutiepy_nb

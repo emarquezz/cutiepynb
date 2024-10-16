@@ -1,4 +1,4 @@
  
 # cutiepynb module
 
-::: cutiepynb.cutiepynb
+::: cutiepynb.cutiepy_nb
