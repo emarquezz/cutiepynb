@@ -38,9 +38,15 @@ python run_examples.py
 
 ## Visual Demo
 
-### Before Applying cutiepynb
-![Before Example](./docs/images/example_1.jpeg)
+### Before Applying cutiepynb 🥱
 
-### After Applying cutiepynb
-![After Example](./path/to/example_2.jpeg)
+<div>
+
+<img src="./docs/images/example_1.jpeg" alt="Before Example"  width="500" style="border:1px solid #000000"/>
+</div>
+
+### After Applying cutiepynb 🎀
+
+<img src="./docs/images/example_2.jpeg" alt="After Example"  width="500"/>
+
 
