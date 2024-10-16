@@ -15,14 +15,14 @@
         <link rel="canonical" href="https://emarquezz.github.io/cutiepynb/cutiepynb/">
       
       
-        <link rel="prev" href="../examples/intro/">
+        <link rel="prev" href="../examples/Test/">
       
       
-        <link rel="next" href="../common/">
+        <link rel="next" href="../core/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.41">
     
     
       
@@ -30,7 +30,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.8c3ca2c6.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -476,6 +476,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/Test/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test Notebook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -573,9 +594,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#cutiepynb.cutiepynb" class="md-nav__link">
+  <a href="#cutiepynb.core.cutiepy_nb" class="md-nav__link">
     <span class="md-ellipsis">
-      cutiepynb.cutiepynb
+      cutiepynb.core.cutiepy_nb
     </span>
   </a>
   
@@ -597,11 +618,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../common/" class="md-nav__link">
+      <a href="../core/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    common module
+    core module
   </span>
   
 
@@ -645,9 +666,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#cutiepynb.cutiepynb" class="md-nav__link">
+  <a href="#cutiepynb.core.cutiepy_nb" class="md-nav__link">
     <span class="md-ellipsis">
-      cutiepynb.cutiepynb
+      cutiepynb.core.cutiepy_nb
     </span>
   </a>
   
@@ -677,14 +698,20 @@
 <h1 id="cutiepynb-module">cutiepynb module<a class="headerlink" href="#cutiepynb-module" title="Permanent link">&para;</a></h1>
 
 
-  <div class="doc doc-object doc-module">
+  <div class="doc doc-object doc-function">
 
-<a id="cutiepynb.cutiepynb"></a>
+<a id="cutiepynb.core.cutiepy_nb"></a>
     <div class="doc doc-contents first">
 
-      <p>Main module.</p>
 
-
+        <details class="quote">
+          <summary>Source code in <code>cutiepynb/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cutiepy_nb</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">sns_palette</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">update_colors</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">doc_chulo</span> <span class="o">=</span> <span class="n">enchular_ipynb</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">sns_palette</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">update_colors</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
+        <span class="n">save_doc_enchulado</span><span class="p">(</span><span class="n">doc_chulo</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+</code></pre></div>
+        </details>
     </div>
 
   </div>
@@ -710,7 +737,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-10-14T18:15:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-10-14</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-10-16T16:48:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-10-16</span>
   </span>
 
     
@@ -780,7 +807,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.525ec568.min.js"></script>
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
       
         <script src="../js/timeago.min.js"></script>
       
