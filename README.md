@@ -35,3 +35,12 @@ To see cutiepynb in action, run the following script to process example notebook
 ```bash
 python run_examples.py
 ```
+
+## Visual Demo
+
+### Before Applying cutiepynb
+![Before Example](./docs/images/example_1.jpeg)
+
+### After Applying cutiepynb
+![After Example](./path/to/example_2.jpeg)
+
