@@ -47,6 +47,6 @@ python run_examples.py
 
 ### After Applying cutiepynb 🎀
 
-<img src="https://raw.githubusercontent.com/emarquezz/cutiepynb/main/docs/images/example_1.jpeg" alt="After Example"  width="500"/>
+<img src="https://raw.githubusercontent.com/emarquezz/cutiepynb/main/docs/images/example_2.jpeg" alt="After Example"  width="500"/>
 
 
