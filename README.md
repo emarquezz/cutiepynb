@@ -61,5 +61,4 @@ cutiepy_nb(test_file, colors=['#5D2197', '#AB1A7C', '#DE2227'], save=True)
 
 
 
-- **Documentation:** [cutiepynb Docs](https://emarquezz.github.io/cutiepynb)
 
