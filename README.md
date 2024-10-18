@@ -44,7 +44,18 @@ python run_examples.py
 
 <img src="https://raw.githubusercontent.com/emarquezz/cutiepynb/main/docs/images/example_1.jpeg" alt="Before Example"  width="500" style="border:1px solid #000000"/>
 </kbd>
+
+### Cutiepying the notebook 
+
+```python
+from cutiepynb import cutiepy_nb
+
+test_file = 'Test.ipynb'
+cutiepy_nb(test_file, colors=['#5D2197', '#AB1A7C', '#DE2227'], save=True)
+```
+
 ### After Applying cutiepynb 🎀
+
 <kbd>
 <img src="https://raw.githubusercontent.com/emarquezz/cutiepynb/main/docs/images/example_2.jpeg" alt="After Example"  width="500"/>
 </kbd>
