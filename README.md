@@ -42,11 +42,11 @@ python run_examples.py
 
 <div>
 
-<img src="./docs/images/example_1.jpeg" alt="Before Example"  width="500" style="border:1px solid #000000"/>
+<img src="https://raw.githubusercontent.com/emarquezz/cutiepynb/main/docs/images/example_1.jpeg" alt="Before Example"  width="500" style="border:1px solid #000000"/>
 </div>
 
 ### After Applying cutiepynb 🎀
 
-<img src="./docs/images/example_2.jpeg" alt="After Example"  width="500"/>
+<img src="https://raw.githubusercontent.com/emarquezz/cutiepynb/main/docs/images/example_1.jpeg" alt="After Example"  width="500"/>
 
 
