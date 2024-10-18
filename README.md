@@ -11,7 +11,6 @@
 Dress them up with vibrant title colors and an auto-generated table of contents.
 
 - **License:** [MIT License](LICENSE)
-- **Documentation:** [cutiepynb Docs](https://emarquezz.github.io/cutiepynb)
 
 ## Features ✨
 
@@ -59,4 +58,8 @@ cutiepy_nb(test_file, colors=['#5D2197', '#AB1A7C', '#DE2227'], save=True)
 <kbd>
 <img src="https://raw.githubusercontent.com/emarquezz/cutiepynb/main/docs/images/example_2.jpeg" alt="After Example"  width="500"/>
 </kbd>
+
+
+
+- **Documentation:** [cutiepynb Docs](https://emarquezz.github.io/cutiepynb)
 
