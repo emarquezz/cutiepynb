@@ -1,11 +1,16 @@
-# Example Notebooks
+# Example notebook
 
-Here are some example notebooks that demonstrate how to use the `cutiepynb` package:
+[`Test.ipynb`](Test.ipynb) is a deliberately small source notebook with three
+heading levels. Process it from the repository root:
 
-- [Test.ipynb](Test.ipynb): Demonstrates how to use `cutiepy_nb` to apply colors and create a table of contents in a Jupyter Notebook.
-- [Another_example.ipynb](Another_example.ipynb): Shows additional customization options for modifying notebook headings.
-
-To run the examples, use the following command in your terminal:
 ```bash
-python run_examples.py
+cutiepynb docs/examples/Test.ipynb \
+  --color "#40498e" \
+  --color "#357ba3" \
+  --color "#38aaac" \
+  --color "#79d6ae"
 ```
+
+Alternatively, run `python run_examples.py`. Both commands create
+`docs/examples/Test_chulo.ipynb` for local inspection; the generated file is not
+part of the source distribution.
