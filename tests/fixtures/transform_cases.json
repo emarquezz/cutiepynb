@@ -1,0 +1,190 @@
+{
+  "cases": [
+    {
+      "name": "mixed sources, duplicate anchors, fences, and heading edits",
+      "notebook": {
+        "cells": [
+          {
+            "id": "cutiepynb-toc",
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+              "# Résumé &amp; goals\n",
+              "A short introduction.\n",
+              "## [Data](https://example.com) *quality*\n",
+              "## [Data](https://example.com) *quality*\n"
+            ]
+          },
+          {
+            "id": "fences",
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": "```python\n# Not a heading\n```\n~~~text\n## Also not a heading\n~~~\n### Pathway results\n"
+          },
+          {
+            "id": "code",
+            "cell_type": "code",
+            "execution_count": null,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+              "# Code is never touched\n",
+              "print('hello')\n"
+            ]
+          }
+        ],
+        "metadata": {
+          "language_info": {
+            "name": "python"
+          }
+        },
+        "nbformat": 4,
+        "nbformat_minor": 5
+      },
+      "operations": [
+        {
+          "colors": [
+            "#112233",
+            "#445566",
+            "#778899"
+          ],
+          "addToc": true,
+          "tocTitle": "On this page",
+          "headingEdits": [
+            {
+              "index": 0,
+              "title": "Main findings ##",
+              "level": 3
+            },
+            {
+              "index": 3,
+              "title": "Pathway [A] &amp; B",
+              "level": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "repeat run recolors edited output and removes its toc",
+      "notebook": {
+        "cells": [
+          {
+            "id": "analysis",
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+              "# Results\n",
+              "## Details\n",
+              "## Details\n"
+            ]
+          }
+        ],
+        "metadata": {},
+        "nbformat": 4,
+        "nbformat_minor": 5
+      },
+      "operations": [
+        {
+          "colors": [
+            "red",
+            "royalblue",
+            "green"
+          ],
+          "addToc": true,
+          "tocTitle": "First contents",
+          "headingEdits": [
+            {
+              "index": 1,
+              "title": "Better details",
+              "level": 4
+            }
+          ]
+        },
+        {
+          "colors": [
+            "#111111",
+            "#222222",
+            "#333333",
+            "#444444"
+          ],
+          "addToc": false,
+          "tocTitle": "Unused contents",
+          "headingEdits": []
+        }
+      ]
+    },
+    {
+      "name": "legacy output upgrades while preserving a user anchor",
+      "notebook": {
+        "cells": [
+          {
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+              " # Table of Contents\n",
+              "+ [Old title](#Old_title_0)\n"
+            ]
+          },
+          {
+            "cell_type": "markdown",
+            "metadata": {
+              "tags": [
+                "keep"
+              ]
+            },
+            "source": [
+              "<a class=\"anchor\" id=\"Old_title_0\"></a>\n",
+              "# <span class=title_0 style=\"color: red\">Old *title*</span>\n",
+              "<a class=\"anchor\" id=\"keep-me\"></a>\n",
+              "Paragraph.\n",
+              "### Another section\n"
+            ]
+          }
+        ],
+        "metadata": {},
+        "nbformat": 4,
+        "nbformat_minor": 4
+      },
+      "operations": [
+        {
+          "colors": [],
+          "addToc": true,
+          "tocTitle": "Fresh contents",
+          "headingEdits": []
+        }
+      ]
+    },
+    {
+      "name": "inline markdown, entities, unicode, crlf, and a level-only edit",
+      "notebook": {
+        "cells": [
+          {
+            "id": "inline",
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": "## *Café* [results](https://example.com) &copy; &#9731;\r\nText\r\n"
+          }
+        ],
+        "metadata": {},
+        "nbformat": 4,
+        "nbformat_minor": 5
+      },
+      "operations": [
+        {
+          "colors": [
+            "rebeccapurple"
+          ],
+          "addToc": false,
+          "tocTitle": "Table of Contents",
+          "headingEdits": [
+            {
+              "index": 0,
+              "level": 4
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
