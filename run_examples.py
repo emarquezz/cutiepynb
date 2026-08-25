@@ -1,15 +1,22 @@
-import os
-from cutiepynb.core import cutiepy_nb
+"""Style the small example notebook included with the documentation."""
+
+from pathlib import Path
+
+from cutiepynb import process_notebook
+
 
 def run_example_notebooks():
-    example_files = [
-        './examples/Test.ipynb',
-        #'./examples/Another_example.ipynb'
-    ]
+    examples = Path(__file__).parent / "docs" / "examples"
+    example_files = [examples / "Test.ipynb"]
 
     for file in example_files:
-        cutiepy_nb(file, colors=['#40498e', '#357ba3', '#38aaac', '#79d6ae'], save=True)
-        print(f"Processed notebook: {file}")
+        output = process_notebook(
+            file,
+            colors=["#40498e", "#357ba3", "#38aaac", "#79d6ae"],
+            overwrite=True,
+        )
+        print(f"Processed notebook: {output}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_example_notebooks()

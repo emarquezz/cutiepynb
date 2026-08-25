@@ -1,64 +1,101 @@
 # cutiepynb 💖
 
-[![PyPI Version](https://img.shields.io/pypi/v/cutiepynb.svg)](https://pypi.python.org/pypi/cutiepynb)
-[![Conda Version](https://img.shields.io/conda/vn/conda-forge/cutiepynb.svg)](https://anaconda.org/conda-forge/cutiepynb)
-![Run Python Tests](https://github.com/emarquezz/cutiepynb/actions/workflows/python-tests.yml/badge.svg)
-![macOS Build Status](https://github.com/emarquezz/cutiepynb/actions/workflows/macos.yml/badge.svg)
-![Ubuntu Build Status](https://github.com/emarquezz/cutiepynb/actions/workflows/ubuntu.yml/badge.svg)
-![Windows Build Status](https://github.com/emarquezz/cutiepynb/actions/workflows/windows.yml/badge.svg)
+[![PyPI](https://img.shields.io/pypi/v/cutiepynb.svg)](https://pypi.org/project/cutiepynb/)
+[![CI](https://github.com/emarquezz/cutiepynb/actions/workflows/ci.yml/badge.svg)](https://github.com/emarquezz/cutiepynb/actions/workflows/ci.yml)
+[![Documentation](https://github.com/emarquezz/cutiepynb/actions/workflows/docs.yml/badge.svg)](https://emarquezz.github.io/cutiepynb/)
+[![Python](https://img.shields.io/pypi/pyversions/cutiepynb.svg)](https://pypi.org/project/cutiepynb/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**Turn your Jupyter Notebooks into beautiful, colorful cutie ipynb with cutiepynb!**  
-Dress them up with vibrant title colors and an auto-generated table of contents.
+Turn an ordinary Jupyter notebook into a colorful, easy-to-navigate notebook.
+`cutiepynb` styles Markdown headings, adds stable anchors, and generates a
+linked table of contents. The base package has no runtime dependencies.
 
-- **License:** [MIT License](LICENSE)
+Prefer not to install anything? The browser app can also fix heading titles and
+levels. Its native JavaScript formatter starts immediately and runs locally in
+your tab—there is no Python runtime or notebook upload:
+[open cutiepynb studio](https://emarquezz.github.io/cutiepynb/app/).
 
-## Features ✨
+To try the complete repository before publishing it, follow the
+[local testing guide](LOCAL_TESTING.md). When you are happy with it, the
+[GitHub Pages guide](GITHUB_PAGES_SETUP.md) explains the one-time repository
+setting.
 
-- 🎨 **Customizable title colors** for notebook headings.
-- 📚 **Automatic table of contents generation**.
-- 🔄 **Supports dynamic updates** to heading styles.
-- 🌈 **Works seamlessly with various seaborn color palettes**.
+## Before and after
 
-## Installation
+<table>
+  <tr>
+    <th>Before</th>
+    <th>After</th>
+  </tr>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/emarquezz/cutiepynb/main/docs/images/example_1.jpeg" alt="Notebook before cutiepynb" width="420"></td>
+    <td><img src="https://raw.githubusercontent.com/emarquezz/cutiepynb/main/docs/images/example_2.jpeg" alt="Notebook after cutiepynb" width="420"></td>
+  </tr>
+</table>
 
-You can install `cutiepynb` via pip:
+## Install
 
 ```bash
-pip install cutiepynb
+python -m pip install cutiepynb
 ```
 
-## Examples
+## Quick start
 
-To see cutiepynb in action, run the following script to process example notebooks:
+From the terminal:
 
 ```bash
-python run_examples.py
+cutiepynb analysis.ipynb \
+  --color "#5D2197" \
+  --color "#AB1A7C" \
+  --color "#DE2227"
 ```
 
-## Visual Demo
+This creates `analysis_chulo.ipynb` and leaves the original untouched. Existing
+output is protected; use `--force` only when you intend to replace it.
 
-### Before Applying cutiepynb 🥱
-
-<kbd>
-
-<img src="https://raw.githubusercontent.com/emarquezz/cutiepynb/main/docs/images/example_1.jpeg" alt="Before Example"  width="500" style="border:1px solid #000000"/>
-</kbd>
-
-### Cutiepying the notebook 
+Or from Python:
 
 ```python
-from cutiepynb import cutiepy_nb
+from cutiepynb import process_notebook
 
-test_file = 'Test.ipynb'
-cutiepy_nb(test_file, colors=['#5D2197', '#AB1A7C', '#DE2227'], save=True)
+output = process_notebook(
+    "analysis.ipynb",
+    colors=["#5D2197", "#AB1A7C", "#DE2227"],
+)
+print(output)
 ```
 
-### After Applying cutiepynb 🎀
+`cutiepy_nb(...)`, the original API, is still available for existing notebooks.
 
-<kbd>
-<img src="https://raw.githubusercontent.com/emarquezz/cutiepynb/main/docs/images/example_2.jpeg" alt="After Example"  width="500"/>
-</kbd>
+## Highlights
 
+- Colors heading levels with your own CSS color palette.
+- Generates a nested table of contents with unique links.
+- Handles several headings in one Markdown cell.
+- Ignores headings inside code cells and fenced Markdown examples.
+- Produces the same result when safely run more than once.
+- Lets the browser studio rename headings, change H1–H6 levels, and recolor
+  notebooks it styled earlier.
+- Supports both a Python API and a command-line interface.
+- Uses seaborn palettes through the optional `cutiepynb[palette]` extra.
+- Includes a private-by-design browser studio that never executes notebook code.
+- Keeps the native browser formatter aligned with Python through shared
+  transformation fixtures.
 
+Read the [full tutorial](https://emarquezz.github.io/cutiepynb/tutorial/) for
+custom output paths, in-place editing, seaborn palettes, recoloring, and
+in-memory transformations.
 
+## Development
 
+```bash
+git clone https://github.com/emarquezz/cutiepynb.git
+cd cutiepynb
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install -e ".[dev]"
+pytest
+mkdocs serve
+```
+
+Released under the [MIT License](LICENSE).

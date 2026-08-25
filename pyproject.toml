@@ -1,82 +1,85 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "cutiepynb"
-version = "1.0.0"
-dynamic = [
-    "dependencies",
-]
-description = "Make your Jupyter notebooks pretty with custom colors and a table of contents."
+version = "1.1.0"
+description = "Add colorful headings and a table of contents to Jupyter notebooks."
 readme = "README.md"
-requires-python = ">=3.8"
-keywords = [
-    "cutiepynb",
-]
-license = {text = "MIT License"}
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [
-  {name = "Elisa Márquez-Zavala", email = "emarquez@lcg.unam.mx"},
+    {name = "Elisa Márquez-Zavala", email = "emarquez@lcg.unam.mx"},
 ]
+keywords = ["jupyter", "notebook", "markdown", "table-of-contents", "styling"]
 classifiers = [
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Science/Research",
     "Natural Language :: English",
-    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
 ]
+dependencies = []
 
-[project.entry-points."console_scripts"]
+[project.scripts]
 cutiepynb = "cutiepynb.cli:main"
 
 [project.optional-dependencies]
-all = [
-    "cutiepynb[extra]",
+palette = ["seaborn>=0.12"]
+test = [
+    "nbformat>=5.7",
+    "pytest>=7",
+    "pytest-cov>=4",
+]
+docs = [
+    "mkdocs-material>=9.5",
+    "mkdocs-jupyter>=0.24",
+    "mkdocstrings[python]>=0.24",
+]
+dev = [
+    "build>=1",
+    "pytest>=7",
+    "pytest-cov>=4",
+    "ruff>=0.6",
+    "seaborn>=0.12",
+    "mkdocs-material>=9.5",
+    "mkdocs-jupyter>=0.24",
+    "mkdocstrings[python]>=0.24",
 ]
 
-extra = [
-    "pandas",
-]
+[project.urls]
+Homepage = "https://github.com/emarquezz/cutiepynb"
+Documentation = "https://emarquezz.github.io/cutiepynb"
+Issues = "https://github.com/emarquezz/cutiepynb/issues"
+Changelog = "https://github.com/emarquezz/cutiepynb/blob/main/docs/changelog.md"
 
-
-[tool]
 [tool.setuptools.packages.find]
 include = ["cutiepynb*"]
 exclude = ["docs*"]
 
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
+[tool.pytest.ini_options]
+addopts = "--strict-config --strict-markers"
+testpaths = ["tests"]
 
+[tool.coverage.run]
+branch = true
+source = ["cutiepynb"]
 
-[tool.distutils.bdist_wheel]
-universal = true
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
 
+[tool.ruff]
+line-length = 100
+target-version = "py39"
 
-[tool.bumpversion]
-current_version = "1.0.0"
-commit = true
-tag = true
-
-[[tool.bumpversion.files]]
-filename = "pyproject.toml"
-search = 'version = "{current_version}"'
-replace = 'version = "{new_version}"'
-
-[[tool.bumpversion.files]]
-filename = "cutiepynb/__init__.py"
-search = '__version__ = "{current_version}"'
-replace = '__version__ = "{new_version}"'
-
-
-[tool.flake8]
-exclude = [
-    "docs",
-]
-max-line-length = 88
-
-
-[project.urls]
-Homepage = "https://github.com/emarquezz/cutiepynb"
-
-[build-system]
-requires = ["setuptools>=64", "setuptools_scm>=8"]
-build-backend = "setuptools.build_meta"
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]

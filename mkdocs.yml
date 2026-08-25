@@ -4,7 +4,7 @@ site_author: emarquezz
 site_url: https://emarquezz.github.io/cutiepynb
 repo_url: https://github.com/emarquezz/cutiepynb
 
-copyright: "Copyright &copy; 2024 - 2024 Elisa Márquez-Zavala"
+copyright: "Copyright &copy; 2024 Elisa Márquez-Zavala"
 
 theme:
     palette:
@@ -38,19 +38,15 @@ theme:
 
 plugins:
     - search
-    - mkdocstrings
-    - git-revision-date
-    - git-revision-date-localized:
-          enable_creation_date: true
-          type: timeago
-    # - pdf-export
+    - mkdocstrings:
+          handlers:
+              python:
+                  options:
+                      show_source: true
     - mkdocs-jupyter:
           include_source: True
           ignore_h1_titles: True
-          execute: True
-          allow_errors: false
-          ignore: ["conf.py"]
-          execute_ignore: ["*ignore.ipynb"]
+          execute: false
           
 markdown_extensions:
     - admonition
@@ -73,16 +69,15 @@ markdown_extensions:
 
 nav:
     - Home: index.md
+    - Web App: webapp.md
     - Installation: installation.md
-    - Usage: usage.md
+    - Tutorial: tutorial.md
+    - Command and API: usage.md
+    - API Reference: api.md
     - Contributing: contributing.md
     - FAQ: faq.md
     - Changelog: changelog.md
-    - Report Issues: https://github.com/emarquezz/cutiepynb/issues
     - Examples:
         - Example Notebooks: examples/example_notebooks.md
-        - examples/intro.ipynb
         - Test Notebook: examples/Test.ipynb
-    - API Reference:
-          - cutiepynb module: cutiepynb.md
-          - core module: core.md
+    - Report Issues: https://github.com/emarquezz/cutiepynb/issues
