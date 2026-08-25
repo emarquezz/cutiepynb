@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Edit and style Jupyter notebook headings, then add a table of contents entirely in your browser."
+    />
+    <meta name="theme-color" content="#c6afe9" />
+    <link rel="canonical" href="https://emarquezz.github.io/cutiepynb/app/" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="cutiepynb studio" />
+    <meta
+      property="og:description"
+      content="Colorful notebooks. Clear navigation. Style an .ipynb locally in your browser."
+    />
+    <meta property="og:url" content="https://emarquezz.github.io/cutiepynb/app/" />
+    <meta property="og:image" content="https://emarquezz.github.io/cutiepynb/app/og.png" />
+    <meta property="og:image:width" content="2048" />
+    <meta property="og:image:height" content="1078" />
+    <meta property="og:image:alt" content="cutiepynb studio — Colorful notebooks. Clear navigation." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="cutiepynb studio" />
+    <meta
+      name="twitter:description"
+      content="Colorful notebooks. Clear navigation. Style an .ipynb locally in your browser."
+    />
+    <meta name="twitter:image" content="https://emarquezz.github.io/cutiepynb/app/og.png" />
+
+    <title>cutiepynb studio</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      /* Pastel visual layer — intentionally kept in this file for easy swapping. */
+      :root {
+        --ink: #4b3d5f;
+        --muted: #796d87;
+        --paper: #fffdfc;
+        --canvas: #fff9fd;
+        --line: #eadff0;
+        --purple: #8b68c8;
+        --purple-dark: #65469a;
+        --pink: #cf6596;
+        --shadow: 0 24px 70px rgba(121, 92, 146, 0.13);
+      }
+
+      body {
+        overflow-x: hidden;
+        background:
+          radial-gradient(circle at 8% 9%, rgba(255, 205, 225, 0.78) 0, transparent 24%),
+          radial-gradient(circle at 89% 13%, rgba(205, 226, 255, 0.8) 0, transparent 25%),
+          radial-gradient(circle at 80% 74%, rgba(203, 240, 226, 0.66) 0, transparent 27%),
+          radial-gradient(circle at 16% 82%, rgba(255, 232, 181, 0.58) 0, transparent 25%),
+          linear-gradient(145deg, #fffafd 0%, #faf7ff 48%, #f8fcff 100%);
+        font-family:
+          ui-rounded, "SF Pro Rounded", Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-image:
+          radial-gradient(circle, rgba(176, 138, 204, 0.18) 1.2px, transparent 1.5px),
+          radial-gradient(circle, rgba(231, 139, 176, 0.14) 1px, transparent 1.3px);
+        background-position: 0 0, 18px 18px;
+        background-size: 38px 38px;
+        content: "";
+        opacity: 0.52;
+        pointer-events: none;
+      }
+
+      .ambient {
+        width: 430px;
+        height: 430px;
+        border: 2px dashed rgba(149, 111, 185, 0.14);
+        border-radius: 48% 52% 62% 38%;
+      }
+
+      .ambient-one {
+        background: rgba(255, 219, 233, 0.22);
+      }
+
+      .ambient-two {
+        background: rgba(211, 239, 231, 0.22);
+      }
+
+      .topbar {
+        margin-top: 12px;
+        padding: 14px 18px;
+        background: rgba(255, 255, 255, 0.56);
+        border: 1px solid rgba(137, 101, 169, 0.1);
+        border-radius: 999px;
+        box-shadow: 0 10px 34px rgba(121, 92, 146, 0.07);
+        backdrop-filter: blur(12px);
+      }
+
+      .brand-logo {
+        display: block;
+        width: clamp(160px, 20vw, 210px);
+        max-width: 54vw;
+        height: auto;
+      }
+
+      .brand-tag {
+        color: #75539f;
+        background: linear-gradient(90deg, #eee8ff, #ffe6f0);
+        border: 1px solid rgba(132, 94, 173, 0.1);
+      }
+
+      .intro {
+        margin-top: 82px;
+      }
+
+      .intro::before {
+        position: absolute;
+        top: -42px;
+        left: 50%;
+        width: min(690px, 92vw);
+        height: 290px;
+        background: linear-gradient(135deg, rgba(249, 215, 235, 0.48), rgba(225, 218, 255, 0.5));
+        border: 1px solid rgba(164, 123, 192, 0.09);
+        border-radius: 48% 52% 45% 55% / 55% 42% 58% 45%;
+        content: "";
+        filter: blur(0.2px);
+        pointer-events: none;
+        transform: translateX(-50%) rotate(-1deg);
+      }
+
+      .eyebrow {
+        color: #a15180;
+      }
+
+      .intro h1 {
+        color: #493956;
+        text-shadow: 0 3px 0 rgba(255, 255, 255, 0.78);
+      }
+
+      .intro h1 em {
+        color: #7958b1;
+        text-shadow: 0 4px 18px rgba(149, 101, 191, 0.16);
+      }
+
+      .name-equation {
+        gap: 7px;
+        padding: 9px 15px;
+        background: rgba(255, 255, 255, 0.7);
+        border-color: rgba(145, 104, 178, 0.14);
+        box-shadow: 0 9px 28px rgba(124, 91, 151, 0.09);
+        backdrop-filter: blur(8px);
+      }
+
+      .name-part {
+        padding: 1px 5px;
+        border-radius: 7px;
+      }
+
+      .name-part:nth-of-type(1) {
+        background: #ffe6f0;
+      }
+
+      .name-part:nth-of-type(3) {
+        background: #eee9ff;
+      }
+
+      .name-part:nth-of-type(5) {
+        background: #e5f6f0;
+      }
+
+      .name-result {
+        padding: 2px 7px;
+        color: #704da4;
+        background: linear-gradient(90deg, #f0e8ff, #ffe5ef);
+        border-radius: 8px;
+      }
+
+      .privacy-note {
+        background: rgba(255, 255, 255, 0.67);
+        border-color: rgba(120, 83, 153, 0.12);
+        box-shadow: 0 8px 26px rgba(120, 83, 153, 0.07);
+      }
+
+      .hero-sparkles {
+        inset: -92px -125px -28px;
+        height: auto;
+        color: #a97acb;
+      }
+
+      .twinkle {
+        position: absolute;
+        display: block;
+        opacity: 0.82;
+        text-shadow: 0 0 12px currentColor, 0 2px 0 rgba(255, 255, 255, 0.95);
+        animation: pastel-twinkle 3.8s ease-in-out infinite;
+        transform-origin: center;
+      }
+
+      .twinkle-1 { top: 4%; left: 7%; color: #d772a4; font-size: 34px; }
+      .twinkle-2 { top: 24%; left: -1%; color: #8e79d5; font-size: 21px; animation-delay: -1.1s; }
+      .twinkle-3 { top: 51%; left: 8%; color: #e2a73e; font-size: 18px; animation-delay: -2.4s; }
+      .twinkle-4 { top: 76%; left: 2%; color: #63ae9c; font-size: 25px; animation-delay: -0.7s; }
+      .twinkle-5 { top: 7%; left: 26%; color: #72a6d8; font-size: 15px; animation-delay: -2s; }
+      .twinkle-6 { top: 1%; right: 24%; color: #d77ba3; font-size: 19px; animation-delay: -3s; }
+      .twinkle-7 { top: 13%; right: 6%; color: #8c70ca; font-size: 31px; animation-delay: -1.7s; }
+      .twinkle-8 { top: 39%; right: -1%; color: #65ad9a; font-size: 20px; animation-delay: -2.8s; }
+      .twinkle-9 { top: 67%; right: 6%; color: #d991b5; font-size: 27px; animation-delay: -0.3s; }
+      .twinkle-10 { top: 84%; right: 18%; color: #d9a742; font-size: 16px; animation-delay: -2.1s; }
+      .twinkle-11 { top: 91%; left: 25%; color: #729ed1; font-size: 15px; animation-delay: -1.4s; }
+      .twinkle-12 { top: 36%; left: 18%; color: #b17acb; font-size: 12px; animation-delay: -3.3s; }
+      .twinkle-13 { top: 48%; right: 18%; color: #e287ae; font-size: 13px; animation-delay: -0.9s; }
+
+      @keyframes pastel-twinkle {
+        0%,
+        100% {
+          opacity: 0.5;
+          transform: translateY(2px) rotate(-9deg) scale(0.78);
+        }
+
+        48% {
+          opacity: 1;
+          transform: translateY(-4px) rotate(9deg) scale(1.17);
+        }
+      }
+
+      .panel,
+      .preview-column {
+        border-color: rgba(128, 95, 153, 0.13);
+        box-shadow: 0 22px 58px rgba(112, 83, 136, 0.1);
+        backdrop-filter: blur(8px);
+      }
+
+      .upload-panel {
+        background: linear-gradient(145deg, rgba(255, 249, 252, 0.96), rgba(255, 239, 247, 0.88));
+      }
+
+      .palette-panel {
+        background: linear-gradient(145deg, rgba(252, 250, 255, 0.96), rgba(239, 234, 255, 0.88));
+      }
+
+      .options-panel {
+        background: linear-gradient(145deg, rgba(249, 253, 255, 0.96), rgba(230, 244, 255, 0.9));
+      }
+
+      .advanced-panel {
+        background: linear-gradient(145deg, rgba(255, 253, 247, 0.96), rgba(255, 244, 218, 0.88));
+      }
+
+      .preview-column {
+        background: linear-gradient(150deg, rgba(255, 255, 255, 0.97), rgba(239, 249, 245, 0.9));
+      }
+
+      .step-label {
+        display: inline-flex;
+        padding: 4px 8px;
+        border-radius: 999px;
+      }
+
+      .upload-panel .step-label { color: #a34d77; background: #ffe3ee; }
+      .palette-panel .step-label { color: #7352a8; background: #eae3ff; }
+      .options-panel .step-label { color: #417da5; background: #dff2ff; }
+      .advanced-panel .step-label { color: #9a712c; background: #ffefc9; }
+      .preview-column .step-label { color: #3d8473; background: #dcf3eb; }
+
+      .drop-zone {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.7), rgba(255, 229, 240, 0.62));
+        border-color: #d9a8c1;
+      }
+
+      .drop-zone:hover,
+      .drop-zone.dragging {
+        background: linear-gradient(145deg, #fff, #ffe3ef);
+        border-color: #bd77a0;
+        box-shadow: 0 12px 30px rgba(190, 111, 157, 0.14);
+      }
+
+      .upload-orbit {
+        color: #6d519c;
+        background: linear-gradient(145deg, #e8dcff, #ffdce9);
+        box-shadow: 0 8px 20px rgba(151, 103, 181, 0.14);
+      }
+
+      .text-button,
+      .disclosure-button {
+        color: #704d9f;
+        background: rgba(255, 255, 255, 0.58);
+        border-color: rgba(119, 77, 156, 0.14);
+      }
+
+      .preset.active {
+        color: #654392;
+        background: linear-gradient(135deg, #eee7ff, #ffe4ef);
+        border-color: #bca1db;
+        box-shadow: 0 7px 18px rgba(125, 88, 159, 0.1);
+      }
+
+      .notebook-page {
+        background: linear-gradient(145deg, #fffefd, #fffaf2);
+        box-shadow: 0 18px 40px rgba(114, 88, 121, 0.11);
+      }
+
+      .download-button {
+        background: linear-gradient(110deg, #8867c5, #cf75a0 62%, #df9b74);
+        box-shadow: 0 14px 30px rgba(168, 96, 147, 0.25);
+      }
+
+      .download-button:hover:not(:disabled) {
+        box-shadow: 0 17px 36px rgba(168, 96, 147, 0.32);
+        transform: translateY(-2px);
+      }
+
+      footer {
+        color: #7c6d87;
+        border-color: rgba(126, 94, 151, 0.12);
+      }
+
+      @media (max-width: 580px) {
+        .topbar {
+          margin-top: 8px;
+          padding: 12px 14px;
+        }
+
+        .intro {
+          margin-top: 58px;
+        }
+
+        .hero-sparkles {
+          inset: -66px -9px -14px;
+        }
+
+        .twinkle-2,
+        .twinkle-4,
+        .twinkle-8,
+        .twinkle-11 {
+          display: none;
+        }
+
+        .twinkle-1,
+        .twinkle-7 {
+          font-size: 25px;
+        }
+
+        .intro::before {
+          top: -24px;
+          height: 265px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .twinkle {
+          animation: none;
+          opacity: 0.82;
+          transform: none;
+        }
+      }
+    </style>
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#studio">Skip to the notebook studio</a>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="../" aria-label="cutiepynb documentation">
+        <img class="brand-logo" src="./logo.png" alt="" width="2048" height="528" />
+        <span class="brand-tag">studio</span>
+      </a>
+      <a
+        class="quiet-link"
+        href="https://github.com/emarquezz/cutiepynb"
+        target="_blank"
+        rel="noreferrer"
+      >
+        View on GitHub <span aria-hidden="true">↗</span>
+      </a>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div class="hero-sparkles" aria-hidden="true">
+          <span class="twinkle twinkle-1">✦</span>
+          <span class="twinkle twinkle-2">✧</span>
+          <span class="twinkle twinkle-3">✦</span>
+          <span class="twinkle twinkle-4">✧</span>
+          <span class="twinkle twinkle-5">✦</span>
+          <span class="twinkle twinkle-6">✧</span>
+          <span class="twinkle twinkle-7">✦</span>
+          <span class="twinkle twinkle-8">✧</span>
+          <span class="twinkle twinkle-9">✦</span>
+          <span class="twinkle twinkle-10">✧</span>
+          <span class="twinkle twinkle-11">✦</span>
+          <span class="twinkle twinkle-12">✧</span>
+          <span class="twinkle twinkle-13">✦</span>
+        </div>
+        <p class="eyebrow"><span aria-hidden="true"></span> Jupyter notebooks, dressed up</p>
+        <h1 id="page-title">Turn your notebook<br />into a <em>cutiepie.</em></h1>
+        <p class="name-story">
+          <span class="sr-only">cutiepynb means cutie plus Python notebook.</span>
+          <span class="name-equation" aria-hidden="true">
+            <span class="name-part name-accent">cutie</span>
+            <span class="name-operator">+</span>
+            <span class="name-part"><strong>py</strong><span class="name-muted">thon</span></span>
+            <span class="name-operator">+</span>
+            <span class="name-part"><strong>n</strong><span class="name-muted">ote</span><strong>b</strong><span class="name-muted">ook</span></span>
+            <span class="name-operator">=</span>
+            <span class="name-result">cutiepynb</span>
+          </span>
+        </p>
+        <p class="lede">
+          Upload a notebook, fix heading titles and levels, tune the palette, and download a
+          polished copy with a linked table of contents.
+        </p>
+        <details class="privacy-note">
+          <summary>
+            <span class="privacy-dot" aria-hidden="true"></span>
+            Runs locally · notebook never uploaded · code never executed
+          </summary>
+          <p>
+            Only the heading outline is previewed. Code cells and saved outputs are neither
+            rendered nor run. Everything is transformed with native browser JavaScript; your
+            notebook data stays in this tab.
+          </p>
+        </details>
+      </section>
+
+      <section class="studio" id="studio" aria-label="Notebook styling studio">
+        <div class="controls-column">
+          <article class="panel upload-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="step-label">01 · Notebook</p>
+                <h2>Choose your file</h2>
+              </div>
+              <button class="text-button" id="demo-button" type="button">Try the demo</button>
+            </div>
+
+            <button class="drop-zone" id="drop-zone" type="button" aria-describedby="upload-help">
+              <span class="upload-orbit" aria-hidden="true">
+                <span class="upload-arrow">↑</span>
+              </span>
+              <strong>Drop an .ipynb here</strong>
+              <span>or click to browse</span>
+            </button>
+            <input
+              id="file-input"
+              type="file"
+              accept=".ipynb"
+              aria-label="Choose a Jupyter notebook"
+              hidden
+            />
+            <p class="upload-help" id="upload-help">One Jupyter notebook · up to 25 MB</p>
+
+            <div class="file-summary" id="file-summary" tabindex="-1" hidden>
+              <div class="file-icon" aria-hidden="true">NB</div>
+              <div class="file-copy">
+                <strong id="file-name"></strong>
+                <span id="file-meta"></span>
+                <span class="styled-note" id="styled-note" hidden>
+                  Ready to recolor · existing styles will be replaced cleanly
+                </span>
+              </div>
+              <button class="summary-button" id="replace-file" type="button">Replace</button>
+              <button class="icon-button" id="remove-file" type="button" aria-label="Remove notebook">
+                ×
+              </button>
+            </div>
+            <p class="inline-error" id="file-error" role="alert" hidden></p>
+            <p class="sr-only" id="file-status" role="status" aria-live="polite"></p>
+          </article>
+
+          <article class="panel palette-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="step-label">02 · Palette</p>
+                <h2>Color the hierarchy</h2>
+              </div>
+              <button class="text-button" id="reset-palette" type="button">Reset</button>
+            </div>
+
+            <div class="presets" role="group" aria-label="Palette presets">
+              <button class="preset active" data-preset="cutie" type="button" aria-pressed="true">
+                <span class="preset-dots cutie-dots" aria-hidden="true"></span> Cutie
+              </button>
+              <button class="preset" data-preset="berry" type="button" aria-pressed="false">
+                <span class="preset-dots berry-dots" aria-hidden="true"></span> Berry
+              </button>
+              <button class="preset" data-preset="ocean" type="button" aria-pressed="false">
+                <span class="preset-dots ocean-dots" aria-hidden="true"></span> Ocean
+              </button>
+              <button class="preset" data-preset="earth" type="button" aria-pressed="false">
+                <span class="preset-dots earth-dots" aria-hidden="true"></span> Earth
+              </button>
+              <button class="preset" data-preset="colorSafe" type="button" aria-pressed="false">
+                <span class="preset-dots safe-dots" aria-hidden="true"></span> Color-safe
+              </button>
+            </div>
+
+            <div class="color-grid" id="color-grid" aria-label="Heading colors"></div>
+            <p class="contrast-summary" id="contrast-summary" aria-live="polite"></p>
+          </article>
+
+          <article class="panel options-panel">
+            <div class="panel-heading compact">
+              <div>
+                <p class="step-label">03 · Navigation</p>
+                <h2>Table of contents</h2>
+              </div>
+              <label class="switch">
+                <input id="toc-toggle" type="checkbox" checked aria-label="Add table of contents" />
+                <span class="switch-track" aria-hidden="true"><span></span></span>
+              </label>
+            </div>
+            <label class="field-label" for="toc-title">Title</label>
+            <input
+              class="text-input"
+              id="toc-title"
+              type="text"
+              value="Table of Contents"
+              maxlength="80"
+              autocomplete="off"
+              aria-invalid="false"
+            />
+          </article>
+
+          <article class="panel advanced-panel">
+            <div class="panel-heading compact">
+              <div>
+                <p class="step-label">04 · Advanced</p>
+                <h2>Edit the outline</h2>
+              </div>
+              <button
+                class="disclosure-button"
+                id="heading-editor-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="heading-editor-body"
+                disabled
+              >
+                <span id="heading-editor-toggle-label">Upload first</span>
+                <span class="disclosure-chevron" aria-hidden="true">⌄</span>
+              </button>
+            </div>
+
+            <div class="heading-editor-body" id="heading-editor-body" hidden>
+              <p class="heading-editor-intro">
+                Fix a title or choose H1–H6. The preview and table of contents update instantly;
+                your original notebook stays unchanged.
+              </p>
+              <div class="heading-editor-toolbar">
+                <label class="heading-search" id="heading-search-wrap" for="heading-search" hidden>
+                  <span class="sr-only">Search headings</span>
+                  <input
+                    id="heading-search"
+                    type="search"
+                    placeholder="Search headings"
+                    autocomplete="off"
+                  />
+                </label>
+                <span class="heading-edit-count" id="heading-edit-count" role="status" aria-live="polite">
+                  No heading edits yet
+                </span>
+                <button class="text-button" id="heading-reset-all" type="button" disabled>
+                  Reset all
+                </button>
+              </div>
+              <ol class="heading-editor-list" id="heading-editor-list"></ol>
+              <p class="heading-editor-empty" id="heading-editor-empty" hidden></p>
+              <button class="show-more-button" id="heading-show-more" type="button" hidden></button>
+              <p class="inline-error" id="heading-editor-error" role="alert" hidden></p>
+            </div>
+          </article>
+        </div>
+
+        <aside class="preview-column" aria-labelledby="preview-title">
+          <div class="preview-header">
+            <div>
+              <p class="step-label">Live preview</p>
+              <h2 id="preview-title">Notebook outline</h2>
+            </div>
+            <span class="runtime-status" id="runtime-status" data-mode="idle" aria-live="polite">
+              <span class="runtime-dot" aria-hidden="true"></span>
+              <span id="runtime-label">Ready to choose a notebook</span>
+            </span>
+          </div>
+          <p class="preview-safety">Outline only — notebook HTML, code, and outputs are not rendered.</p>
+
+          <div class="notebook-shell">
+            <div class="notebook-toolbar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <div class="notebook-tab" id="notebook-tab">notebook.ipynb</div>
+            </div>
+            <div class="notebook-page" id="preview-page">
+              <div class="empty-preview" id="empty-preview">
+                <div class="empty-glyph" aria-hidden="true">#</div>
+                <strong>Your outline will appear here</strong>
+                <span>Choose a notebook or load the demo to begin.</span>
+              </div>
+              <div id="preview-content" hidden></div>
+            </div>
+          </div>
+
+          <p class="preview-limit" id="preview-limit" hidden></p>
+          <div class="preview-stats" id="preview-stats" hidden>
+            <div><strong id="cell-count">0</strong><span>cells</span></div>
+            <div><strong id="heading-count">0</strong><span>headings</span></div>
+            <div><strong id="level-count">0</strong><span>levels</span></div>
+          </div>
+
+          <button class="download-button" id="download-button" type="button" disabled aria-busy="false">
+            <span id="download-label">Prepare &amp; download notebook</span>
+            <span class="download-icon" aria-hidden="true">↓</span>
+          </button>
+          <p class="download-hint" id="download-hint">Choose a notebook to enable the download.</p>
+          <div class="generation-error" id="generation-error" role="alert" hidden>
+            <span id="generation-error-text"></span>
+            <button id="retry-button" type="button">Retry</button>
+          </div>
+          <a class="prepared-link" id="prepared-link" hidden>Download prepared notebook</a>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <span>Made with JavaScript, browser magic, and unreasonable affection for color.</span>
+      <span>cutiepynb · MIT License</span>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <noscript>
+      <div class="noscript-message">cutiepynb studio needs JavaScript to read and style notebooks locally.</div>
+    </noscript>
+  </body>
+</html>
