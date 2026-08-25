@@ -1,21 +1,32 @@
 # Installation
 
-## Stable release
+## From PyPI
 
-To install cutiepynb, run this command in your terminal:
-
-```
-pip install cutiepynb
+```bash
+python -m pip install cutiepynb
 ```
 
-This is the preferred method to install cutiepynb, as it will always install the most recent stable release.
+cutiepynb supports Python 3.9 and newer and has no required runtime
+dependencies.
 
-If you don't have [pip](https://pip.pypa.io) installed, this [Python installation guide](http://docs.python-guide.org/en/latest/starting/installation/) can guide you through the process.
+## With seaborn palette support
 
-## From sources
-
-To install cutiepynb from sources, run this command in your terminal:
-
+```bash
+python -m pip install "cutiepynb[palette]"
 ```
-pip install git+https://github.com/emarquezz/cutiepynb
+
+## Development version
+
+```bash
+python -m pip install "git+https://github.com/emarquezz/cutiepynb.git"
+```
+
+## Editable development install
+
+```bash
+git clone https://github.com/emarquezz/cutiepynb.git
+cd cutiepynb
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install -e ".[dev]"
 ```
