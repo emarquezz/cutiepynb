@@ -15,10 +15,6 @@ levels. Its native JavaScript formatter starts immediately and runs locally in
 your tab—there is no Python runtime or notebook upload:
 [open cutiepynb studio](https://emarquezz.github.io/cutiepynb/app/).
 
-To try the complete repository before publishing it, follow the
-[local testing guide](LOCAL_TESTING.md). When you are happy with it, the
-[GitHub Pages guide](GITHUB_PAGES_SETUP.md) explains the one-time repository
-setting.
 
 ## Before and after
 
