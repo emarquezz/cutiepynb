@@ -1,3 +1,0 @@
-# core module
-
-::: cutiepynb.core
