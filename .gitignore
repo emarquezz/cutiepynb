@@ -105,3 +105,6 @@ ENV/
 
 # IDE settings
 .vscode/
+tests/.DS_Store
+cutiepynb/.DS_Store
+.DS_Store
